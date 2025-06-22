@@ -15,7 +15,7 @@
 | Day 5 | Training pipeline | [🔗 Day5](./Day5) |
 | Day 6 | Linear Regression | [🔗 Day6](./Day6) |
 | Day 7 | Logistic Regression | [🔗 Day7](./Day7) |
-| Day 8+ | (Đang cập nhật...) | ... |
+| Day 8 | Datasets & DataLoaders | [🔗 Day8](./Day8) |
 
 ---
 
