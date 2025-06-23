@@ -1,1 +1,42 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Virtual environment
 venv/
+.env/
+.venv/
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# PyTorch + training output
+*.pt
+*.pth
+runs/         # for TensorBoard logs (if used)
+checkpoints/
+models/
+
+# Datasets (optional, nếu bạn lưu dataset lớn local)
+data/
+datasets/
+*.zip
+*.tar.gz
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment / dependency files
+pip-log.txt
+conda-meta/
