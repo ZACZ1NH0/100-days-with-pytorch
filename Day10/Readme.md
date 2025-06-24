@@ -41,3 +41,45 @@ loss sẽ thấp.
 Nhưng nếu model bảo “tôi nghĩ 5% là mèo”, thì loss cao.
 
 Cross Entropy đo mức độ lệch giữa dự đoán và thực tế.
+
+### Ví dụ 
+
+Phân loại: Chó, Mèo, Gà
+
+Ta có một mô hình phân loại 3 lớp:
+
+    Lớp 0: Chó
+
+    Lớp 1: Mèo
+
+    Lớp 2: Gà
+
+[2.0, 1.0, 0.1]  # mẫu 1
+
+Sau khi đưa vào hàm softmax, ta nhận được:
+
+torch.softmax(torch.tensor([2.0, 1.0, 0.1]), dim=0)
+
+ ≈ [0.659, 0.242, 0.099]
+
+👉 Mô hình “tin” rằng:
+
+65.9% là Chó
+
+24.2% là Mèo
+
+9.9% là Gà
+
+=> Dự đoán nhãn: Chó (vì xác suất cao nhất).
+
+
+Nhãn thật (target) là số nguyên: 0, 1, hoặc 2
+
+Với CrossEntropyLoss, không cần softmax thủ công.
+
+Ta chỉ đưa logits thô vào, loss sẽ tự tính nội bộ:
+
+        loss_fn = nn.CrossEntropyLoss()
+        logits = torch.tensor([[2.0, 1.0, 0.1]])
+        target = torch.tensor([0])
+        loss = loss_fn(logits, target)
