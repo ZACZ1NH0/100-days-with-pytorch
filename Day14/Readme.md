@@ -25,4 +25,58 @@ Từ đồ thị ta có thể thấy sử dụng transfer learning sẽ mang l�
 
     Trong trường hợp bộ dữ liệu có kích thước quá nhỏ và khó có thể tìm kiếm và mở rộng thêm thì các mô hình được huấn luyện từ chúng sẽ khó có thể dự báo tốt. Tận dụng lại tri thức từ các pretrained-model với cùng tác vụ phân loại sẽ giúp các mô hình được huấn luyện dự báo tốt hơn với dữ liệu mới vì mô hình được học trên cả 2 nguồn tri thức đó là dữ liệu huấn luyện và dữ liệu mà nó đã được học trước đó.
 
+##### 🎓 1. Fine-tuning là gì?
+
+###### ✅ Định nghĩa:
+
+Fine-tuning là tận dụng toàn bộ mô hình đã học sẵn, nhưng tiếp tục huấn luyện lại toàn bộ trọng số 
+
+của nó trên tập dữ liệu mới.
+
+###### ⚙️ Cách hoạt động:
+
+Bắt đầu từ một mô hình pretrained (ví dụ ResNet18 đã học trên ImageNet).
+
+Thay fc layer cuối (do số class khác nhau).
+
+Không đóng băng các layer: toàn bộ mô hình được “tinh chỉnh” lại với learning rate nhỏ.
+
+###### 💡 Khi nào dùng fine-tuning?
+
+Khi dữ liệu mới nhiều.
+
+Khi domain mới khác nhiều so với domain cũ (ví dụ ImageNet là ảnh tự nhiên, bài toán mới là ảnh X-quang).
+
+##### 🧊 2. Feature Extraction là gì?
+
+###### ✅ Định nghĩa:
+
+Feature extraction là giữ nguyên các layer trích đặc trưng của mô hình pretrained (đóng băng trọng 
+
+số), chỉ huấn luyện lại phần phân loại (classifier) ở cuối.
+
+###### ⚙️ Cách hoạt động:
+
+Load mô hình pretrained.
+
+Đóng băng tất cả các layer convolutional (chỉ dùng để extract features).
+
+Thay fc layer cuối, huấn luyện nó từ đầu.
+
+###### 💡 Khi nào dùng feature extraction?
+
+Khi dữ liệu mới ít, hoặc bài toán tương tự bài học cũ.
+
+Khi bạn cần huấn luyện nhanh, ít tài nguyên.
+
+
+
+
+| Tiêu chí                    | Fine-tuning                              | Feature Extraction                    |
+| --------------------------- | ---------------------------------------- | ------------------------------------- |
+| ❓ Mục tiêu                  | Tinh chỉnh toàn bộ mô hình               | Dùng feature extractor đã học sẵn     |
+| 🧊 Layer được freeze        | Không freeze gì                          | Freeze gần hết, chỉ train fc layer    |
+| 🧠 Cần nhiều dữ liệu không? | Có, càng nhiều càng tốt                  | Không, phù hợp khi ít dữ liệu         |
+| 🕐 Tốc độ train             | Chậm hơn                                 | Nhanh hơn                             |
+| 🛠 Tính tùy biến            | Linh hoạt, thích nghi domain mới tốt hơn | Hạn chế hơn nếu domain mới khác nhiều |
 
